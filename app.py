@@ -44,8 +44,25 @@ class SessionManager:
             "result": None,
             "error": None,
             "start_time": datetime.now().isoformat(),
+            "agents": [],  # Track individual agent outputs
+            "current_agent": None,
         }
         self.current_session_id = session_id
+    
+    def add_agent_output(self, session_id, agent_name, output_data):
+        """Add agent output to session."""
+        if session_id in self.sessions:
+            self.sessions[session_id]["agents"].append({
+                "name": agent_name,
+                "output": output_data,
+                "timestamp": datetime.now().isoformat(),
+                "status": "completed"
+            })
+    
+    def set_current_agent(self, session_id, agent_name):
+        """Set currently running agent."""
+        if session_id in self.sessions:
+            self.sessions[session_id]["current_agent"] = agent_name
     
     def update_progress(self, session_id, message, level="info"):
         """Update session progress."""
@@ -94,6 +111,7 @@ class WebHooks(PipelineHooks):
         super().on_agent_start(agent_name)
         message = f"🚀 Starting {agent_name}..."
         self.session_manager.update_progress(self.session_id, message)
+        self.session_manager.set_current_agent(self.session_id, agent_name)
         self.agents_status[agent_name] = "running"
     
     def on_agent_end(self, agent_name: str, output, input_tokens=0, output_tokens=0) -> None:
@@ -102,6 +120,14 @@ class WebHooks(PipelineHooks):
         message = f"✅ {agent_name} complete ({output_tokens} tokens)"
         self.session_manager.update_progress(self.session_id, message)
         self.agents_status[agent_name] = "complete"
+        
+        # Store agent output for display
+        self.session_manager.add_agent_output(self.session_id, agent_name, {
+            "raw_output": str(output)[:500],  # Truncate for display
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": input_tokens + output_tokens
+        })
     
     def on_score_generated(self, dimension: str, raw_score: float, confidence: float, sources_count: int) -> None:
         """Called when score is generated."""
@@ -254,6 +280,8 @@ def get_status(session_id):
         "progress": progress_messages,
         "error": session.get("error"),
         "start_time": session.get("start_time"),
+        "agents": session.get("agents", []),
+        "current_agent": session.get("current_agent"),
     }), 200
 
 

@@ -419,10 +419,10 @@
 
         .modal-content {
             background: white;
-            padding: 30px;
+            padding: 35px;
             border-radius: 12px;
-            max-width: 600px;
-            max-height: 80vh;
+            max-width: 800px;
+            max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s;
@@ -573,6 +573,354 @@
             background: #e8f5e9;
             color: #2e7d32;
         }
+
+        .agent-analysis-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .section-divider {
+            margin: 30px 0;
+            border-top: 3px solid #667eea;
+            position: relative;
+        }
+
+        .section-divider::after {
+            content: '▼';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #667eea;
+            padding: 0 10px;
+            font-size: 18px;
+        }
+
+        .agent-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .agent-card.running {
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .agent-card.completed {
+            border-color: #4caf50;
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .agent-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .agent-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .agent-status.running {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .agent-status.completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .agent-output {
+            background: #f5f7fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .agent-metrics {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .agent-metric {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .timeline-dot.active {
+            background: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .timeline-dot.completed {
+            background: #4caf50;
+        }
+
+        .view-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .flow-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .flow-step {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: #667eea;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .flow-step-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .flow-step-badge {
+            padding: 4px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .flow-io-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .flow-io-box {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .flow-io-box h4 {
+            font-size: 14px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .flow-io-content {
+            font-size: 13px;
+            color: #424242;
+            line-height: 1.6;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .flow-metrics {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .flow-metric {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .flow-metric strong {
+            color: #333;
+        }
+
+        .view-button {
+            background: #667eea !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 16px !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            margin-top: 12px !important;
+            display: inline-block !important;
+            transition: all 0.3s !important;
+        }
+
+        .view-button:hover {
+            background: #5568d3 !important;
+        }
+
+        .io-viewer {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .io-viewer.expanded {
+            display: block;
+        }
+
+        .io-viewer-header {
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 4px 4px 0 0;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .io-viewer-content {
+            background: #2d3436;
+            color: #a8e6ce;
+            padding: 15px;
+            border-radius: 0 0 4px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .io-viewer-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .io-viewer-content::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .io-viewer-content::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        .close-viewer {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0 6px;
+            line-height: 1;
+        }
+
+        .close-viewer:hover {
+            background: rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
@@ -655,7 +1003,38 @@
 
             <div class="content chat-container">
                 <div class="messages" id="messagesContainer"></div>
-                <div class="results-container" id="resultsContainer"></div>
+                
+                <!-- Tabbed View for Analysis and Results -->
+                <div id="tabbedSection" style="display: none;">
+                    <div class="view-tabs">
+                        <button class="tab-button active" onclick="switchTab('summary')">📊 Summary Dashboard</button>
+                        <button class="tab-button" onclick="switchTab('agents')">🤖 Agent Analysis</button>
+                        <button class="tab-button" onclick="switchTab('flow')">🔄 Process Flow</button>
+                    </div>
+
+                    <!-- Tab 1: Summary Dashboard -->
+                    <div id="tab-summary" class="tab-content active">
+                        <div class="results-container" id="resultsContainer"></div>
+                    </div>
+
+                    <!-- Tab 2: Agent Analysis -->
+                    <div id="tab-agents" class="tab-content">
+                        <div class="agent-analysis-section" style="display: block; background: transparent; padding: 0;">
+                            <h3 style="margin-bottom: 15px;">🤖 Agent Analysis Pipeline</h3>
+                            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Detailed analysis from each evaluation agent</p>
+                            <div id="agentCardsContainer2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Process Flow -->
+                    <div id="tab-flow" class="tab-content">
+                        <div class="flow-container">
+                            <h3 style="margin-bottom: 20px;">🔄 Evaluation Process Flow</h3>
+                            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Visual representation of how your idea progressed through the evaluation pipeline</p>
+                            <div id="flowStepsContainer"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
